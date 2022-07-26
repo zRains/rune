@@ -7,14 +7,16 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "lint": "eslint src/**/*.{ts,vue}",
-    "fix": "eslint src/**/*.{ts,vue} --fix",
+    "lint": "eslint --ext .ts,.vue --ignore-path .gitignore .",
+    "fix": "eslint --fix --ext .ts,.vue --ignore-path .gitignore .",
+    "format": "prettier --write ./**/*.{vue,ts,scss,json,md}",
     "prepare": "husky install"
   },
   "dependencies": {
     "vue": "^3.2.37"
   },
   "devDependencies": {
+    "@iconify/vue": "^3.2.1",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7",
     "@vitejs/plugin-vue": "^3.0.0",
@@ -28,6 +30,7 @@
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
+    "sass": "^1.54.0",
     "typescript": "^4.6.4",
     "vite": "^3.0.0",
     "vue-tsc": "^0.38.4"
@@ -41,6 +44,7 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "src/**": "npm run fix"
+    "src/**": "npm run format",
+    "src/**/*.{ts,vue}": "npm run fix"
   }
 }
