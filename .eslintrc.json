@@ -10,18 +10,37 @@
     "sourceType": "module"
   },
   "plugins": ["vue", "@typescript-eslint"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".ts"],
+        "moduleDirectory": ["node_modules", "src/"]
+      }
+    }
+  },
   "rules": {
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
     "no-param-reassign": [
       "error",
       {
         "props": true,
-        "ignorePropertyModificationsFor": ["config", "response", "state", "vm"]
+        "ignorePropertyModificationsFor": []
       }
     ],
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "import/prefer-default-export": "off",
     "vue/no-v-model-argument": "off",
     "vue/no-multiple-template-root": "off",
-    "vue/no-mutating-props": "off"
+    "vue/no-mutating-props": "off",
+    "no-restricted-syntax": "off"
   }
 }

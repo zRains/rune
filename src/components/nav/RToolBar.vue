@@ -1,6 +1,5 @@
 <template>
-  <div class="MainLayout">this is layout</div>
-  <Icon />
+  <div class="ToolBar"></div>
 </template>
 
 <script setup lang="ts"></script>
