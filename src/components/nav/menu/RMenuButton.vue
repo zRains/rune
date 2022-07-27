@@ -3,8 +3,8 @@
 </template>
 
 <script setup lang="ts">
-import type { NavItemWithButton } from '../../types/nav'
-import RButton from '../internal/RButton.vue'
+import type { NavItemWithButton } from '../../../types/nav'
+import RButton from '../../internal/RButton.vue'
 
 defineProps<{
   item: NavItemWithButton

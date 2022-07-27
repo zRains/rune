@@ -11,7 +11,7 @@ import { h } from 'vue'
 import { Icon } from '@iconify/vue'
 import type { NavItem } from '../../types/nav'
 import RLogo from '../RLogo.vue'
-import RMenuBar from './RMenuBar.vue'
+import RMenuBar from './menu/RMenuBar.vue'
 import RToolBar from './RToolBar.vue'
 
 const menuBarConfig: NavItem[] = [

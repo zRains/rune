@@ -2,7 +2,7 @@
   <ul class="RMenuPop">
     <li v-for="item in items" :key="item.text">
       <div :class="{ RMenuPopItemIcon: true, hasPadding }"><component v-if="'icon' in item" :is="item.icon" /></div>
-      <RMenuGroup :class="{ RMenuPopItem: true }" v-if="'items' in item" :text="item.text" :items="item.items" />
+      <RMenuPopGroup :class="{ RMenuPopItem: true }" v-if="'items' in item" :text="item.text" :items="item.items" />
       <RMenuButton :class="{ RMenuPopItem: true }" v-else :item="item" />
     </li>
   </ul>
@@ -10,9 +10,9 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { NavItemChildren, NavItemWithButton } from '../../types/nav'
+import type { NavItemChildren, NavItemWithButton } from '../../../types/nav'
 import RMenuButton from './RMenuButton.vue'
-import RMenuGroup from './RMenuPopGroup.vue'
+import RMenuPopGroup from './RMenuPopGroup.vue'
 
 const props = defineProps<{
   items: (NavItemChildren | NavItemWithButton)[]
@@ -23,7 +23,7 @@ const hasPadding = computed(() => props.items.some((item) => 'toggle' in item))
 
 <style lang="scss">
 @use 'sass:math';
-@import '../../styles/vars.scss';
+@import '../../../styles/vars.scss';
 
 .RMenuPop {
   display: block;
