@@ -1,19 +1,26 @@
-export type NavItemWithLink = {
+import { VNode } from 'vue'
+
+export type NavItemWithButton = {
   text: string
+  icon?: VNode
+  toggle?: boolean
   onClick: () => void
 }
 
 export type NavItemChildren = {
-  text?: string
-  items: NavItemWithLink[]
+  text: string
+  radioOption?: {
+    limit: number
+  }
+  items: NavItemWithButton[]
 }
 
 export interface NavItemWithChildren {
   text?: string
-  children: (NavItemChildren | NavItemWithLink)[]
+  children: (NavItemChildren | NavItemWithButton)[]
 }
 
-export type NavItem = NavItemWithLink | NavItemWithChildren
+export type NavItem = NavItemWithButton | NavItemWithChildren
 
 // social link ---------------------------------------------------------------
 

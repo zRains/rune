@@ -3,15 +3,12 @@
 </template>
 
 <script setup lang="ts">
-import type { NavItemWithLink } from '../../types/nav'
+import type { NavItemWithButton } from '../../types/nav'
 import RButton from '../internal/RButton.vue'
 
 defineProps<{
-  item: NavItemWithLink
+  item: NavItemWithButton
 }>()
 </script>
 
-<style lang="scss">
-// .RMenuButton {
-// }
-</style>
+<style lang="scss"></style>

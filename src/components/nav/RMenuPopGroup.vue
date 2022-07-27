@@ -1,22 +1,26 @@
 <template>
   <div class="RMenuPopGroup">
-    <div v-if="text" class="title">{{ text }} <Icon icon="ion:chevron-forward" /></div>
-    <div class="OutsidePop">
-      <template v-for="item in items" :key="item.text">
+    <div v-if="text" class="title">{{ text }}<Icon icon="ion:chevron-forward" /></div>
+    <ul class="OutsidePop">
+      <li v-for="item in items" :key="item.text">
+        <div :class="{ RMenuPopItemIcon: true, hasPadding }"><component v-if="'icon' in item" :is="item.icon" /></div>
         <RMenuButton :class="{ OutsidePopItem: true }" :item="item" />
-      </template>
-    </div>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { NavItemWithLink } from '../../types/nav'
+import { computed } from 'vue'
+import type { NavItemWithButton } from '../../types/nav'
 import RMenuButton from './RMenuButton.vue'
 
-defineProps<{
+const props = defineProps<{
   text?: string
-  items: NavItemWithLink[]
+  items: NavItemWithButton[]
 }>()
+
+const hasPadding = computed(() => props.items.some((item) => 'toggle' in item))
 </script>
 
 <style lang="scss">
@@ -29,13 +33,18 @@ defineProps<{
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    .iconify {
+      margin-left: 8px;
+    }
   }
 
   .OutsidePop {
     position: absolute;
     min-width: 130px;
+    margin: 0;
     padding: 6px;
-    top: -6px;
+    top: -10px;
     left: 100%;
     opacity: 0;
     visibility: hidden;
@@ -46,9 +55,21 @@ defineProps<{
     border-radius: 3px;
     color: var(--c-black);
 
-    .OutsidePopItem {
-      padding: 4px 8px;
+    li {
+      display: flex;
+      align-items: center;
+      padding: 4px 0;
       border-radius: 3px;
+      list-style: none;
+
+      .RMenuPopItemIcon.hasPadding {
+        width: 14px;
+      }
+
+      .OutsidePopItem {
+        flex-grow: 1;
+        padding: 0 8px;
+      }
 
       &:hover {
         background-color: var(--c-black-mute);
