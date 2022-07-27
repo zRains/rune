@@ -110,6 +110,7 @@ const menuBarConfig: NavItem[] = [
 @import '../../styles/vars.scss';
 
 .RNav {
+  position: relative;
   display: flex;
   align-items: center;
   padding: 0 8px;
@@ -117,5 +118,6 @@ const menuBarConfig: NavItem[] = [
   background-color: var(--c-bg-mute);
   box-shadow: rgb(0 0 0 / 10%) 0 1px;
   user-select: none;
+  z-index: $z-index-nav;
 }
 </style>

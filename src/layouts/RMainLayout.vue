@@ -1,18 +1,14 @@
 <template>
-  <div class="MainLayout">
-    <!-- nav -->
-    <slot name="nav"></slot>
-    <!-- mask -->
-    <slot name="mask"></slot>
-    <!-- main -->
-    <slot name="main"></slot>
+  <div class="RMainLayout">
+    <!-- left bar -->
+    <slot name="left-bar" />
+    <!-- main-container -->
+    <slot name="main-container" />
+    <!-- right bar -->
+    <slot name="right-bar" />
   </div>
 </template>
 
 <script setup lang="ts"></script>
 
-<style lang="scss">
-.MainLayout {
-  min-height: 100vh;
-}
-</style>
+<style lang="scss"></style>

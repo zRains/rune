@@ -1,11 +1,18 @@
 <template>
-  <RMainLayout>
+  <RAppLayout>
     <template #nav><RNav /></template>
-  </RMainLayout>
+    <template #main>
+      <RMainLayout>
+        <template #left-bar><RLeftBar /></template>
+      </RMainLayout>
+    </template>
+  </RAppLayout>
 </template>
 
 <script setup lang="ts">
+import RAppLayout from './layouts/RAppLayout.vue'
 import RMainLayout from './layouts/RMainLayout.vue'
+import RLeftBar from './components/rune-core/leftbar/RLeftBar.vue'
 import RNav from './components/nav/RNav.vue'
 </script>
 
