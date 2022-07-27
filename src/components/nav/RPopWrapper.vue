@@ -7,21 +7,19 @@
       <Icon icon="fluent:more-horizontal-32-filled" height="20" v-else />
     </div>
 
-    <RMenuPop :items="items" @click="() => clickToClose && (isActivated = !isActivated)">
-      <slot />
-    </RMenuPop>
+    <RMenuPop :items="items" @click="() => clickToClose && (isActivated = !isActivated)" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { NavItemChildren, NavItemWithLink } from '../../types/nav'
+import type { NavItemChildren, NavItemWithButton } from '../../types/nav'
 import RMenuPop from './RMenuPop.vue'
 
 defineProps<{
   text?: string
   label?: string
-  items: (NavItemChildren | NavItemWithLink)[]
+  items: (NavItemChildren | NavItemWithButton)[]
   clickToClose?: boolean
 }>()
 
