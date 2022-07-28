@@ -1,7 +1,7 @@
 <template>
   <nav class="RMenuBar">
     <template v-for="item in menuBarConfig" :key="item.text">
-      <RPopWrapper
+      <RMenuPopWrapper
         :class="{ RMenuBarItem: true }"
         v-if="'children' in item"
         :text="item.text"
@@ -14,9 +14,9 @@
 </template>
 
 <script setup lang="ts">
-import type { NavItem } from '../../types/nav'
+import type { NavItem } from '../../../types/nav'
 import RMenuButton from './RMenuButton.vue'
-import RPopWrapper from './RPopWrapper.vue'
+import RMenuPopWrapper from './RMenuPopWrapper.vue'
 
 defineProps<{
   menuBarConfig: NavItem[]
@@ -24,7 +24,7 @@ defineProps<{
 </script>
 
 <style lang="scss">
-@import '../../styles/vars.scss';
+@import '../../../styles/vars.scss';
 
 .RMenuBar {
   display: flex;

@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { NavItemChildren, NavItemWithButton } from '../../types/nav'
+import type { NavItemChildren, NavItemWithButton } from '../../../types/nav'
 import RMenuPop from './RMenuPop.vue'
 
 defineProps<{
@@ -28,7 +28,7 @@ const isActivated = ref(false)
 
 <style lang="scss">
 @use 'sass:math';
-@import '../../styles/vars.scss';
+@import '../../../styles/vars.scss';
 
 .RPopWrapper {
   position: relative;

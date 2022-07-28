@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { NavItemWithButton } from '../../types/nav'
+import type { NavItemWithButton } from '../../../types/nav'
 import RMenuButton from './RMenuButton.vue'
 
 const props = defineProps<{
@@ -24,7 +24,7 @@ const hasPadding = computed(() => props.items.some((item) => 'toggle' in item))
 </script>
 
 <style lang="scss">
-@import '../../styles/vars.scss';
+@import '../../../styles/vars.scss';
 
 .RMenuPopGroup {
   position: relative;
