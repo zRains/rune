@@ -1,10 +1,18 @@
 <template>
   <div class="RLeftBar">
-    <div class="RHSplit"></div>
+    <div class="RLeftBarContainer">
+      <RUtilSection />
+      <RComponentSection />
+    </div>
+    <RHSplit />
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import RUtilSection from './RUtilSection.vue'
+import RComponentSection from './RComponentSection.vue'
+import RHSplit from '../../internal/RHSplit.vue'
+</script>
 
 <style lang="scss">
 @import '../../../styles/vars.scss';
@@ -14,15 +22,9 @@
   height: calc(100vh - #{$nav-height-desktop});
   width: 200px;
 
-  .RHSplit {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 192px;
-    width: 8px;
-    background-color: var(--c-bg-mute);
-    box-shadow: 10px 0 10px -10px rgb(0 0 0 / 10%);
-    cursor: col-resize;
+  .RLeftBarContainer {
+    min-height: 100%;
+    margin-right: 8px;
   }
 }
 </style>

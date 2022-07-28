@@ -45,6 +45,10 @@ import RButton from '../internal/RButton.vue'
 
         &.exportBtn {
           background-color: var(--c-green);
+
+          &:active {
+            background-color: darken($color: #1d9a6c, $amount: 5%);
+          }
         }
       }
 
