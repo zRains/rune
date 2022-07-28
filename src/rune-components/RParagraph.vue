@@ -1,5 +1,5 @@
 <template>
-  <div class="RParagraph">
+  <div class="RParagraph" draggable="true" ref="draggableEl">
     <div class="RParagraphIcon">
       <Icon icon="fa6-solid:paragraph" height="24" />
     </div>
@@ -13,7 +13,29 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+
+const draggableEl = ref<HTMLElement>()
+
+function onDragStart(event: DragEvent) {
+  const target = event.target as HTMLElement
+  event.dataTransfer!.setData('runeCompId', '../../../rune-components/RParagraph.vue')
+  event.dataTransfer!.dropEffect = 'none'
+  // Make it half transparent when it's being dragged
+  target.style.opacity = '0.3'
+}
+
+function onDragEnd(event: DragEvent) {
+  const target = event.target as HTMLElement
+  target.style.opacity = ''
+}
+
+onMounted(() => {
+  draggableEl.value!.addEventListener('dragstart', onDragStart)
+  draggableEl.value!.addEventListener('dragend', onDragEnd)
+})
+</script>
 
 <style lang="scss">
 .RParagraph {

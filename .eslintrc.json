@@ -33,7 +33,7 @@
       "error",
       {
         "props": true,
-        "ignorePropertyModificationsFor": []
+        "ignorePropertyModificationsFor": ["event"]
       }
     ],
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
