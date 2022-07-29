@@ -4,6 +4,8 @@
     <template #main>
       <RMainLayout>
         <template #left-bar><RLeftBar /></template>
+        <template #main-container><RMainContainer /></template>
+        <template #right-bar><RRightBar /></template>
       </RMainLayout>
     </template>
   </RAppLayout>
@@ -12,7 +14,9 @@
 <script setup lang="ts">
 import RAppLayout from './layouts/RAppLayout.vue'
 import RMainLayout from './layouts/RMainLayout.vue'
+import RMainContainer from './components/rune-core/main/RMainContainer.vue'
 import RLeftBar from './components/rune-core/leftbar/RLeftBar.vue'
+import RRightBar from './components/rune-core/rightbar/RRightBar.vue'
 import RNav from './components/nav/RNav.vue'
 </script>
 
