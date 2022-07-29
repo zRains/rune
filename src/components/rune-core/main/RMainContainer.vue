@@ -2,7 +2,7 @@
   <div class="RMainContainer">
     <!-- TODO test draggable area -->
     <div class="RDraggableArea" ref="dropZoneEl">
-      <template v-for="runeComp in containerElArr" :key="runeComp.id">
+      <template v-for="(runeComp, index) in containerElArr" :key="runeComp.id + index">
         <component :is="runeComp.comp" />
       </template>
     </div>
@@ -42,10 +42,6 @@ function onDrop(event: DragEvent) {
   target.style.border = '2.5px dashed var(--c-black-soft)'
 }
 
-// function loadRuneCompById(runeCompId: string) {
-//   return defineAsyncComponent({ loader: () => import('../../../rune-components/RParagraph.vue') })
-// }
-
 onMounted(() => {
   dropZoneEl.value!.addEventListener('dragover', onDragover)
   dropZoneEl.value!.addEventListener('drop', onDrop)
@@ -60,7 +56,7 @@ onMounted(() => {
 
   .RDraggableArea {
     margin: 16px;
-    height: 200px;
+    min-height: 200px;
     border: 2.5px dashed var(--c-black-soft);
   }
 }

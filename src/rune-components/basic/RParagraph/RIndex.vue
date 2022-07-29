@@ -1,9 +1,9 @@
 <template>
-  <div class="RParagraph" draggable="true" ref="draggableEl">
-    <div class="RParagraphIcon">
+  <div class="RIndex RParagraphIndex" draggable="true" ref="draggableEl">
+    <div class="icon">
       <Icon icon="fa6-solid:paragraph" height="24" />
     </div>
-    <div class="RParagraphSkeleton">
+    <div class="skeleton">
       <ul>
         <li></li>
         <li></li>
@@ -20,10 +20,8 @@ const draggableEl = ref<HTMLElement>()
 
 function onDragStart(event: DragEvent) {
   const target = event.target as HTMLElement
-  event.dataTransfer!.setData('runeCompId', '../../../rune-components/RParagraph.vue')
-  event.dataTransfer!.dropEffect = 'none'
-  // Make it half transparent when it's being dragged
-  target.style.opacity = '0.3'
+  event.dataTransfer!.setData('runeCompId', '../../../rune-components/basic/RParagraph/render.vue')
+  target.style.opacity = '0.5'
 }
 
 function onDragEnd(event: DragEvent) {
@@ -38,7 +36,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-.RParagraph {
+.RParagraphIndex {
   display: flex;
   padding: 8px 8px 8px 0;
   margin: 0 8px;
@@ -47,7 +45,7 @@ onMounted(() => {
   user-select: none;
   cursor: pointer;
 
-  .RParagraphIcon {
+  .icon {
     height: 32px;
     width: 32px;
     line-height: 32px;
@@ -59,7 +57,7 @@ onMounted(() => {
     }
   }
 
-  .RParagraphSkeleton {
+  .skeleton {
     flex-grow: 1;
 
     ul {
