@@ -15,13 +15,22 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { runeCompConfig } from '../../../types/rune'
+import { setTransferData } from '../../../utils/helpers'
+
+const RParagraphConfig: runeCompConfig = {
+  name: 'RParagraph',
+  path: '../rune-components/basic/RParagraph/RRender.vue'
+}
 
 const draggableEl = ref<HTMLElement>()
 
 function onDragStart(event: DragEvent) {
   const target = event.target as HTMLElement
-  event.dataTransfer!.setData('runeCompId', '../../../rune-components/basic/RParagraph/render.vue')
+  const transfer = event.dataTransfer!
   target.style.opacity = '0.5'
+  transfer.effectAllowed = 'copy'
+  setTransferData(transfer, RParagraphConfig)
 }
 
 function onDragEnd(event: DragEvent) {
