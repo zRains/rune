@@ -30,8 +30,13 @@ onMounted(creteDraggableArea.bind(null, originalArea, originalCompArr))
 
   #RDraggableArea {
     margin: 16px;
+    padding: 8px;
     min-height: 200px;
     border: 2.5px dashed var(--c-black-soft);
+
+    .RRender:not(:last-child) {
+      margin-bottom: 8px;
+    }
   }
 }
 </style>
