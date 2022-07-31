@@ -1,14 +1,14 @@
 <template>
-  <div class="RRender RParagraphRender">
+  <div class="RRender RParagraphRender" draggable="true">
     <p
       class="mainContentArea"
-      contenteditable="true"
       ref="paragraph"
+      :contenteditable="disableMask"
       @input="$emit('onTextUpdate', ($event.target as HTMLInputElement).textContent)"
       @blur="disableMask = false"
     ></p>
     <div :class="{ mask: true, disable: disableMask }">
-      <div class="maskOpt edit" @click="editParagraph"><Icon icon="fluent:code-text-edit-20-regular" height="23" /></div>
+      <div class="maskOpt edit" @click="disableMask = true"><Icon icon="fluent:code-text-edit-20-regular" height="23" /></div>
       <div class="maskOpt delete"><Icon icon="fluent:delete-dismiss-28-regular" height="23" /></div>
       <div class="maskOpt move"><Icon icon="fluent:arrow-bidirectional-up-down-24-regular" height="23" /></div>
     </div>
@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { nextTick, onMounted, ref, watch } from 'vue'
 
 // lock comp index
 defineProps<{
@@ -27,10 +27,7 @@ defineEmits(['onTextUpdate'])
 const paragraph = ref<HTMLElement>()
 const disableMask = ref(false)
 
-function editParagraph() {
-  disableMask.value = true
-  paragraph.value!.focus()
-}
+watch(disableMask, (n) => n && nextTick(() => paragraph.value!.focus()))
 
 onMounted(() => {
   paragraph.value!.addEventListener('paste', function (event) {
@@ -51,6 +48,7 @@ onMounted(() => {
   .mainContentArea {
     margin: 0;
     padding: 8px;
+    min-height: 30px;
     font-size: 16px;
     outline: none;
   }
@@ -66,7 +64,9 @@ onMounted(() => {
     bottom: 0;
     background-color: var(--c-text-dark-2);
     border-radius: 3px;
+    visibility: hidden;
     opacity: 0;
+    transition: visibility 0.15s, opacity 0.15s;
 
     .maskOpt {
       padding: 4px;
@@ -102,12 +102,15 @@ onMounted(() => {
     }
 
     &.disable {
-      display: none;
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
     }
+  }
 
-    &:hover {
-      opacity: 1;
-    }
+  &:hover .mask:not(.disable) {
+    visibility: visible;
+    opacity: 1;
   }
 }
 </style>
