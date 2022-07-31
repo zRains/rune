@@ -27,7 +27,6 @@ function onDrop(event: DragEvent) {
 export function creteDraggableArea(originalArea: Ref<HTMLElement | undefined>, originalCompArr: Ref<{ name: string; comp: any }[]>) {
   draggableArea = originalArea
   compArr = originalCompArr
-
   draggableArea.value!.addEventListener('dragover', onDragover)
   draggableArea.value!.addEventListener('drop', onDrop)
   draggableArea.value!.addEventListener('dragleave', onDragLeave)
@@ -36,7 +35,6 @@ export function creteDraggableArea(originalArea: Ref<HTMLElement | undefined>, o
 export function destroyDraggableArea() {
   draggableArea.value = undefined
   compArr.value = undefined
-
   draggableArea.value!.removeEventListener('dragover', onDragover)
   draggableArea.value!.removeEventListener('drop', onDrop)
   draggableArea.value!.removeEventListener('dragleave', onDragLeave)

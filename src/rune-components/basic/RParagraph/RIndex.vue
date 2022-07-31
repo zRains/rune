@@ -1,5 +1,5 @@
 <template>
-  <div class="RIndex RParagraphIndex" draggable="true" ref="draggableEl">
+  <div class="RIndex RParagraphIndex" draggable="true" ref="originalComp">
     <div class="icon">
       <Icon icon="fa6-solid:paragraph" height="24" />
     </div>
@@ -15,33 +15,24 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { runeCompConfig } from '../../../types/rune'
-import { setTransferData } from '../../../utils/helpers'
+import type { RuneCompConfig, CssStyleObject } from '../../../types/rune'
+import { createDraggableComp } from '../../../utils/draggableComp'
 
-const RParagraphConfig: runeCompConfig = {
+const RParagraphConfig: RuneCompConfig = {
   name: 'RParagraph',
   path: '../rune-components/basic/RParagraph/RRender.vue'
 }
 
-const draggableEl = ref<HTMLElement>()
-
-function onDragStart(event: DragEvent) {
-  const target = event.target as HTMLElement
-  const transfer = event.dataTransfer!
-  target.style.opacity = '0.5'
-  transfer.effectAllowed = 'copy'
-  setTransferData(transfer, RParagraphConfig)
+const dragStartStyle: CssStyleObject = {
+  opacity: '0.5'
+}
+const dragEndStyle: CssStyleObject = {
+  opacity: '1'
 }
 
-function onDragEnd(event: DragEvent) {
-  const target = event.target as HTMLElement
-  target.style.opacity = ''
-}
+const originalComp = ref<HTMLElement | undefined>()
 
-onMounted(() => {
-  draggableEl.value!.addEventListener('dragstart', onDragStart)
-  draggableEl.value!.addEventListener('dragend', onDragEnd)
-})
+onMounted(createDraggableComp.bind(null, originalComp, RParagraphConfig, dragStartStyle, dragEndStyle))
 </script>
 
 <style lang="scss">

@@ -1,4 +1,4 @@
-import { runeCompConfig } from '../types/rune'
+import type { CssStyleObject, RuneCompConfig } from '../types/rune'
 
 export const OUTBOUND_RE = /^[a-z]+:/i
 
@@ -58,8 +58,17 @@ export function getRelativeTime(d1: number, d2 = +new Date()) {
 }
 
 // 设置传输对象
-export function setTransferData<T extends runeCompConfig>(transfer: DataTransfer, data: T): void {
+export function setTransferData<T extends RuneCompConfig>(transfer: DataTransfer, data: T): void {
   Object.entries(data).forEach(([key, value]) => {
     transfer.setData(key, value)
   })
+}
+
+// 设置样式
+export function setStyle(target: HTMLElement, styles: CssStyleObject) {
+  let cssResult = ''
+  Object.entries(styles).forEach(([key, value]) => {
+    cssResult += `${key.replace(/[A-Z]/g, (a) => `-${a.toLowerCase()}`)}: ${value};`
+  })
+  target.setAttribute('style', cssResult)
 }
