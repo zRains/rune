@@ -1,9 +1,9 @@
 <template>
   <div class="RMainContainer">
     <!-- TODO test draggable area -->
-    <div class="RDraggableArea" ref="dropZoneEl">
-      <template v-for="(runeComp, index) in containerElArr" :key="runeComp.id + index">
-        <component :is="runeComp.comp" />
+    <div id="RDraggableArea" ref="originalArea">
+      <template v-for="(runeComp, index) in originalCompArr" :key="runeComp.name + index">
+        <component :is="runeComp.comp" :index="index" @onTextUpdate="onTextUpdate" />
       </template>
     </div>
   </div>
@@ -11,53 +11,32 @@
 
 <script setup lang="ts">
 // TODO test code
-import { ref, onMounted, defineAsyncComponent, Ref, markRaw } from 'vue'
+import { ref, onMounted, Ref } from 'vue'
+import { creteDraggableArea } from '../../../utils/draggableArea'
 
-const dropZoneEl = ref<HTMLElement>()
-const containerElArr: Ref<{ id: string; comp: any }[]> = ref([])
-
-function onDragover(event: DragEvent) {
-  event.preventDefault()
-  event.dataTransfer!.dropEffect = 'copy'
+const onTextUpdate = function (val: string) {
+  console.log(val)
 }
 
-function onDragEnter(event: DragEvent) {
-  const target = event.target as HTMLElement
-  target.style.border = '2.5px dashed var(--c-green)'
-}
+const originalArea = ref<HTMLElement | undefined>()
+const originalCompArr: Ref<{ name: string; comp: any }[]> = ref([])
 
-function onDragLeave(event: DragEvent) {
-  const target = event.target as HTMLElement
-  target.style.border = '2.5px dashed var(--c-black-soft)'
-}
-
-function onDrop(event: DragEvent) {
-  event.preventDefault()
-  const target = event.target as HTMLElement
-  const data = event.dataTransfer!.getData('runeCompId')
-  containerElArr.value.push({
-    id: 'RParagraph',
-    comp: markRaw(defineAsyncComponent({ loader: () => import(/* @vite-ignore */ data) }))
-  })
-  target.style.border = '2.5px dashed var(--c-black-soft)'
-}
-
-onMounted(() => {
-  dropZoneEl.value!.addEventListener('dragover', onDragover)
-  dropZoneEl.value!.addEventListener('drop', onDrop)
-  dropZoneEl.value!.addEventListener('dragenter', onDragEnter)
-  dropZoneEl.value!.addEventListener('dragleave', onDragLeave)
-})
+onMounted(creteDraggableArea.bind(null, originalArea, originalCompArr))
 </script>
 
 <style lang="scss">
 .RMainContainer {
   flex-grow: 1;
 
-  .RDraggableArea {
+  #RDraggableArea {
     margin: 16px;
+    padding: 8px;
     min-height: 200px;
     border: 2.5px dashed var(--c-black-soft);
+
+    .RRender:not(:last-child) {
+      margin-bottom: 8px;
+    }
   }
 }
 </style>
