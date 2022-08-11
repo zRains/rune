@@ -1,5 +1,5 @@
 <template>
-  <div class="RRender RParagraphRender" draggable="true">
+  <div class="RRender RParagraphRender">
     <p
       class="mainContentArea"
       ref="paragraph"
@@ -18,11 +18,11 @@
 <script setup lang="ts">
 import { nextTick, onMounted, ref, watch } from 'vue'
 
-// lock comp index
-defineProps<{
-  index: number
-}>()
 defineEmits(['onTextUpdate'])
+
+defineProps<{
+  id: string
+}>()
 
 const paragraph = ref<HTMLElement>()
 const disableMask = ref(false)
