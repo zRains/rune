@@ -1,5 +1,5 @@
 <template>
-  <div class="RIndex RParagraphIndex" draggable="true" ref="originalComp">
+  <div class="RIndex RParagraphIndex" ref="originalComp">
     <div class="icon">
       <Icon icon="fa6-solid:paragraph" height="24" />
     </div>
@@ -22,7 +22,6 @@ const RParagraphConfig: RuneCompConfig = {
   name: 'RParagraph',
   path: '../rune-components/basic/RParagraph/RRender.vue'
 }
-
 const dragStartStyle: CssStyleObject = {
   opacity: '0.5'
 }

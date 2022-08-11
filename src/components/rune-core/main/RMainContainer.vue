@@ -1,27 +1,42 @@
 <template>
   <div class="RMainContainer">
     <!-- TODO test draggable area -->
-    <div id="RDraggableArea" ref="originalArea">
+    <!-- <div id="RDraggableArea" ref="originalArea">
       <template v-for="(runeComp, index) in originalCompArr" :key="runeComp.name + index">
-        <component :is="runeComp.comp" :index="index" @onTextUpdate="onTextUpdate" />
+        <component :is="runeComp.comp" :index="index" />
       </template>
-    </div>
+    </div> -->
+    <draggable item-key="id" :component-data="{ id: 'RDraggableArea' }" v-model="originalCompArr" v-bind="dragOptions">
+      <template #item="{ element }">
+        <component :is="element.comp" :id="element.id" />
+      </template>
+    </draggable>
+    {{ originalCompArr.map((c) => c.id) }}
   </div>
 </template>
 
 <script setup lang="ts">
+import draggable from 'vuedraggable'
 // TODO test code
-import { ref, onMounted, Ref } from 'vue'
+import { ref, Ref, nextTick } from 'vue'
 import { creteDraggableArea } from '../../../utils/draggableArea'
 
-const onTextUpdate = function (val: string) {
-  console.log(val)
+// const onTextUpdate = function (val: string) {
+//   console.log(val)
+// }
+
+const originalCompArr: Ref<{ id: string; name: string; comp: any }[]> = ref([])
+
+function dragOptions() {
+  return {
+    disabled: false,
+    ghostClass: 'ghost'
+  }
 }
 
-const originalArea = ref<HTMLElement | undefined>()
-const originalCompArr: Ref<{ name: string; comp: any }[]> = ref([])
-
-onMounted(creteDraggableArea.bind(null, originalArea, originalCompArr))
+nextTick(() => {
+  creteDraggableArea(document.getElementById('RDraggableArea')!, originalCompArr)
+})
 </script>
 
 <style lang="scss">
